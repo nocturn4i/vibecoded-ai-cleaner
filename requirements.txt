@@ -4,3 +4,4 @@ numpy
 ydata-profiling
 streamlit-pandas-profiling
 setuptools
+openai
