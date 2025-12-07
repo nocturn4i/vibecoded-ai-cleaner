@@ -2,9 +2,9 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import re
+import openai
 from ydata_profiling import ProfileReport
 from streamlit_pandas_profiling import st_profile_report
-import openai
 
 # ------------------------------
 # ⚡ OpenAI client setup
@@ -32,18 +32,18 @@ You are a data-cleaning AI assistant. Here is a CSV snippet:
 
 {csv_sample}
 
-Generate Python pandas code to clean it.
-Return only code, no explanations.
+Generate clean, safe Python pandas code to clean the dataframe named df.
+Return ONLY valid python code. No explanations.
 """
     response = openai.ChatCompletion.create(
-    model="gpt-4",
+    model="gpt-3.5-turbo",
     messages=[
         {"role": "system", "content": "You are a helpful data-cleaning assistant."},
         {"role": "user", "content": prompt}
         ],
         temperature=0
     )
-    code = response.choices[0].message.content
+    return response.choices[0].message.content.strip()
 
 # ------------------------------
 # Main logic
