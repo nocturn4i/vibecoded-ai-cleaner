@@ -34,16 +34,15 @@ You are a data-cleaning AI assistant. Here is a CSV snippet:
 Generate Python pandas code to clean it.
 Return only code, no explanations.
 """
-    response = openai.chat.completions.create(
-        model="gpt-4",
-        messages=[
-            {"role": "system", "content": "You are a helpful data-cleaning assistant."},
-            {"role": "user", "content": prompt}
+    response = openai.ChatCompletion.create(
+    model="gpt-4",
+    messages=[
+        {"role": "system", "content": "You are a helpful data-cleaning assistant."},
+        {"role": "user", "content": prompt}
         ],
         temperature=0
     )
-    return response.choices[0].message.content
-
+    code = response.choices[0].message.content
 
 # ------------------------------
 # Main logic
