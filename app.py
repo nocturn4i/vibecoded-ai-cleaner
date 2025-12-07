@@ -4,12 +4,12 @@ import numpy as np
 import re
 from ydata_profiling import ProfileReport
 from streamlit_pandas_profiling import st_profile_report
-from openai import OpenAI
+import openai
 
 # ------------------------------
 # ⚡ OpenAI client setup
 # ------------------------------
-client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 # ------------------------------
 # Streamlit page config
@@ -34,7 +34,7 @@ You are a data-cleaning AI assistant. Here is a CSV snippet:
 Generate Python pandas code to clean it.
 Return only code, no explanations.
 """
-    response = client.chat.completions.create(
+    response = openai.chat.completions.create(
         model="gpt-4",
         messages=[
             {"role": "system", "content": "You are a helpful data-cleaning assistant."},
@@ -43,6 +43,7 @@ Return only code, no explanations.
         temperature=0
     )
     return response.choices[0].message.content
+
 
 # ------------------------------
 # Main logic
