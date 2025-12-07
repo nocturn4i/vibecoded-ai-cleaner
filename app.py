@@ -14,6 +14,7 @@ openai.api_key = st.secrets["OPENAI_API_KEY"]
 # ------------------------------
 # Streamlit page config
 # ------------------------------
+st.write("API Key is set:", "OPENAI_API_KEY" in st.secrets)
 st.set_page_config(page_title="VibeCoded AI Cleaner", layout="wide")
 st.title("🌟 VibeCoded AI CSV Cleaner & Profiler with LLM")
 
